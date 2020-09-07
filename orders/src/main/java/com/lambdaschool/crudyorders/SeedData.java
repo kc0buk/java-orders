@@ -21,7 +21,7 @@ import java.util.Set;
 
 
 @Transactional
-@Component
+// ***** REMOVE FROM SPRING -- get data from data.dql ****** @Component
 public class SeedData implements CommandLineRunner
 {
     /**

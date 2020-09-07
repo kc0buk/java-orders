@@ -75,6 +75,7 @@ The database will be available from the H2 Console. Each table will contain the 
 
 * [x] Please fork and clone this repository. This repository does not have a starter project, so create one inside of
  the cloned repository folder. Regularly commit and push your code as appropriate.
+ * [x] Submit pull request (https://github.com/kc0buk/java-orders/pull/1)
 
 ### MVP
 
