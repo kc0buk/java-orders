@@ -1,6 +1,8 @@
 package com.lambdaschool.crudyorders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -27,7 +29,10 @@ public class Customer {
 
     @ManyToOne
     @JoinColumn(name = "agentcode", nullable = false)
-    private Customer customer;
+    private Agent agent;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
     public Customer() {
         // Default constructor, required by JPA
@@ -42,7 +47,8 @@ public class Customer {
                     double receiveamt,
                     double paymentamt,
                     double outstandingamt,
-                    String phone) {
+                    String phone,
+                    Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -53,6 +59,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
+        this.agent = agent;
     }
 
     public long getCustcode() {
@@ -143,11 +150,19 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Agent getAgent() {
+        return agent;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
