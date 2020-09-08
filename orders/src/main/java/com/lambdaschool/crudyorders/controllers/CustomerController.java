@@ -35,4 +35,9 @@ public class CustomerController {
 
     // GET /customers/namelike/{likename} - Returns all customers and their orders with a customer name containing
     // the given substring
+    @GetMapping(value = "/namelike/{keyword}", produces = {"application/json"})
+    public ResponseEntity<?> findCustomerByKeyword(@PathVariable String keyword) {
+        List<Customer> list = customerServices.findCustomerByKeyword(keyword);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

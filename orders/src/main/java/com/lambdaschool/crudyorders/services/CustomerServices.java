@@ -10,5 +10,7 @@ public interface CustomerServices {
 
     Customer findCustomerByID(long customerID);
 
+    List<Customer> findCustomerByKeyword(String keyword);
+
     Customer save(Customer customer);
 }

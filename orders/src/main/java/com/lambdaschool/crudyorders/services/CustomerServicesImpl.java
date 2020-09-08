@@ -29,6 +29,13 @@ public class CustomerServicesImpl implements CustomerServices {
     }
 
     @Override
+    public List<Customer> findCustomerByKeyword(String keyword) {
+
+        List<Customer> list = custrepos.findByCustnameContainingIgnoringCase(keyword);
+        return list;
+    }
+
+    @Override
     public Customer save(Customer customer) {
         return custrepos.save(customer);
     }
