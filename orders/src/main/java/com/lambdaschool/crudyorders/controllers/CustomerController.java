@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,11 @@ public class CustomerController {
     }
 
     // GET /customers/customer/{id} - Returns the customer and their orders with the given customer id
+    @GetMapping(value = "/customer/{customerID}", produces = {"application/json"})
+    public ResponseEntity<?> findCustomerByID(@PathVariable long customerID) {
+        Customer c = customerServices.findCustomerByID(customerID);
+        return new ResponseEntity<>(c, HttpStatus.OK);
+    }
 
     // GET /customers/namelike/{likename} - Returns all customers and their orders with a customer name containing
     // the given substring
