@@ -2,6 +2,7 @@ package com.lambdaschool.crudyorders.controllers;
 
 import com.lambdaschool.crudyorders.models.Customer;
 import com.lambdaschool.crudyorders.services.CustomerServices;
+import com.lambdaschool.crudyorders.views.OrderCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,14 @@ public class CustomerController {
     @GetMapping(value = "/namelike/{keyword}", produces = {"application/json"})
     public ResponseEntity<?> findCustomerByKeyword(@PathVariable String keyword) {
         List<Customer> list = customerServices.findCustomerByKeyword(keyword);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    // GET /customers/orders/count
+    // Return a list of all customers with the number of orders they have placed.
+    @GetMapping(value = "/orders/count", produces = {"application/json"})
+    public ResponseEntity<?> findOrderCount() {
+        List<OrderCount> list = customerServices.findOrderCount();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
