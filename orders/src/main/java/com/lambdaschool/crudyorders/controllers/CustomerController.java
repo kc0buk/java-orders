@@ -77,7 +77,7 @@ public class CustomerController {
 
     // PUT /customers/customer/{custcode}
     // Replaces customer record including associated orders with data provided
-    @PutMapping(value = "/customer/customer{custcode}", consumes = {"application/json"}, produces = {"application" +
+    @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"}, produces = {"application" +
             "/json"})
     public ResponseEntity<?> replaceCustomer(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer) {
         // Set custcode on incoming object to same custcode as PathVariable in URL
