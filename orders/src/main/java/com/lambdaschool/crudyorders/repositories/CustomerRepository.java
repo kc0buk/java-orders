@@ -1,6 +1,7 @@
 package com.lambdaschool.crudyorders.repositories;
 
 import com.lambdaschool.crudyorders.models.Customer;
+import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
 import com.lambdaschool.crudyorders.views.OrderCount;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
