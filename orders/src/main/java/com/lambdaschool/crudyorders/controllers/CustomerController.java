@@ -4,13 +4,14 @@ import com.lambdaschool.crudyorders.models.Customer;
 import com.lambdaschool.crudyorders.services.CustomerServices;
 import com.lambdaschool.crudyorders.views.OrderCount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -51,4 +52,36 @@ public class CustomerController {
         List<OrderCount> list = customerServices.findOrderCount();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    // POST /customers/customer
+    // Adds a new customer including any new orders
+    @PostMapping(value = "/customer", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer newCustomer) {
+        // Resets Custcode to 0 to ensure create new customer
+        newCustomer.setCustcode(0);
+
+        // Sends incoming values to customerServices.save method
+        newCustomer = customerServices.save(newCustomer);
+
+        // Generates response header with new URL pointing to newly created record
+        HttpHeaders responseHeaders = new HttpHeaders();
+        URI newCustomerURI = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{customerID}")
+                .buildAndExpand(newCustomer.getCustcode())
+                .toUri();
+        responseHeaders.setLocation(newCustomerURI);
+
+        // Returns null body, header and response status CREATED
+        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+    }
+
+    // PUT /customers/customer/{custcode}
+    // Replaces customer record including associated orders with data provided
+
+    // PATCH /customers/customer/{custcode}
+    // Uupdates customers with new data. Only new data is to be sent from the frontend client.
+
+    // DELETE /customers/customer/{custcode}
+    // Deletes the given customer including any associated orders
+
 }

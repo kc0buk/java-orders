@@ -35,4 +35,10 @@ public class OrderController {
         List<Order> list = orderServices.getCustAdvanceAmt(amount);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/advanceamount", produces = {"application/json"})
+    public ResponseEntity<?> getCustAdvanceAmt() {
+        List<Order> list = orderServices.getCustAdvanceAmt(0);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
