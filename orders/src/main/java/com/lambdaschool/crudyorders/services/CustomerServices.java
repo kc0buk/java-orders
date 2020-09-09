@@ -1,7 +1,6 @@
 package com.lambdaschool.crudyorders.services;
 
 import com.lambdaschool.crudyorders.models.Customer;
-import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
 import com.lambdaschool.crudyorders.views.OrderCount;
 
 import java.util.List;

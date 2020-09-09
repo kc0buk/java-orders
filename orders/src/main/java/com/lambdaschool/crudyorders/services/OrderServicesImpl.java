@@ -2,7 +2,7 @@ package com.lambdaschool.crudyorders.services;
 
 import com.lambdaschool.crudyorders.models.Order;
 import com.lambdaschool.crudyorders.repositories.OrderRepository;
-import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
+//import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +22,8 @@ public class OrderServicesImpl implements OrderServices {
     }
 
     @Override
-    public List<CustomerAdvanceAmt> getCustAdvanceAmt() {
-        List<CustomerAdvanceAmt> list = ordersrepos.getCustAdvanceAmt();
-        return list;
+    public List<Order> getCustAdvanceAmt(double amount) {
+        return ordersrepos.findByAdvanceamountGreaterThan(amount);
     }
 
     @Override

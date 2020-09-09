@@ -2,7 +2,7 @@ package com.lambdaschool.crudyorders.controllers;
 
 import com.lambdaschool.crudyorders.models.Order;
 import com.lambdaschool.crudyorders.services.OrderServices;
-import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
+//import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,9 @@ public class OrderController {
 
     // GET /orders/advanceamount
     // Returns all orders with their customers that have an advanceamount greater than 0.
-    @GetMapping(value = "/advanceamount", produces = {"application/json"})
-    public ResponseEntity<?> getCustAdvanceAmt() {
-        List<CustomerAdvanceAmt> list = orderServices.getCustAdvanceAmt();
+    @GetMapping(value = "/advanceamount/{amount}", produces = {"application/json"})
+    public ResponseEntity<?> getCustAdvanceAmt(@PathVariable double amount) {
+        List<Order> list = orderServices.getCustAdvanceAmt(amount);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
