@@ -71,12 +71,25 @@ public class CustomerController {
                 .toUri();
         responseHeaders.setLocation(newCustomerURI);
 
-        // Returns null body, header and response status CREATED
+        // Return null body, header and response status CREATED
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
     // PUT /customers/customer/{custcode}
     // Replaces customer record including associated orders with data provided
+    @PutMapping(value = "/customer/customer{custcode}", consumes = {"application/json"}, produces = {"application" +
+            "/json"})
+    public ResponseEntity<?> replaceCustomer(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer) {
+        // Set custcode on incoming object to same custcode as PathVariable in URL
+        updateCustomer.setCustcode(custcode);
+
+        // Send incoming values to customerServices.save() method
+        updateCustomer = customerServices.save(updateCustomer);
+
+        // Return null body and response status OK
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 
     // PATCH /customers/customer/{custcode}
     // Uupdates customers with new data. Only new data is to be sent from the frontend client.
