@@ -63,7 +63,7 @@ public class CustomerController {
         // Resets Custcode to 0 to ensure create new customer
         newCustomer.setCustcode(0);
 
-        // Sends incoming values to customerServices.save method
+        // Sets newly created customer to newCustomer object -- can be return in respone body
         newCustomer = customerServices.save(newCustomer);
 
         // Generates response header with new URL pointing to newly created record
@@ -74,7 +74,7 @@ public class CustomerController {
                 .toUri();
         responseHeaders.setLocation(newCustomerURI);
 
-        // Return null body, header and response status CREATED
+        // Return null body for security reasons, header and response status CREATED
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
@@ -82,20 +82,33 @@ public class CustomerController {
     // Replaces customer record including associated orders with data provided
     @PutMapping(value = "/customer/{custcode}", consumes = {"application/json"}, produces = {"application" +
             "/json"})
+    // Calls replaceCustomer method, check data is valid JSON object, sets incoming data to updateCustomer object
     public ResponseEntity<?> replaceCustomer(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer) {
         // Set custcode on incoming object to same custcode as PathVariable in URL
         updateCustomer.setCustcode(custcode);
 
-        // Send incoming values to customerServices.save() method
+        // Set updated customer into updateCustomer object -- can be returned in response body
         updateCustomer = customerServices.save(updateCustomer);
 
-        // Return null body and response status OK
+        // Return null body for security reasons and response status OK
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
 
     // PATCH /customers/customer/{custcode}
-    // Uupdates customers with new data. Only new data is to be sent from the frontend client.
+    // Updates customers with new data. Only new data is to be sent from the frontend client.
+    @PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"}, produces = {"application/json"})
+
+    public ResponseEntity<?> updateCustomer(@PathVariable long custcode, @RequestBody Customer updateCustomer) {
+
+        // Sets updated customer into updateCustomer object -- can be returned in response body
+        // Incoming data object and custcode from PathVariable are passed into update function to verify correct
+        // record is updated, rather than relying on custcode in data object.
+        updateCustomer = customerServices.update(updateCustomer, custcode);
+
+        // Return null body for security reasons and response status OK
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
     // DELETE /customers/customer/{custcode}
     // Deletes the given customer including any associated orders

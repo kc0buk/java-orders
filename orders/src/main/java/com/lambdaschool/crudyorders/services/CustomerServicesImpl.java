@@ -120,6 +120,93 @@ public class CustomerServicesImpl implements CustomerServices {
 
     @Transactional
     @Override
+    public Customer update(Customer customer, long custcode) {
+
+        // Create a  updateCustomer object & pre-fill with values from current object
+        Customer updateCustomer = findCustomerByID(custcode);
+
+        // Check if incoming values exist (!= null or TRUE if primitive type)
+        // Update current values with new values if present
+        // If field is not present in incoming values, retain current values
+        if (customer.getCustname() != null) {
+            updateCustomer.setCustname(customer.getCustname());
+        }
+
+        if (customer.getCustcity() != null) {
+            updateCustomer.setCustcity(customer.getCustcity());
+        }
+
+        if (customer.getWorkingarea() != null) {
+            updateCustomer.setWorkingarea(customer.getWorkingarea());
+        }
+
+        if (customer.getCustcountry() != null) {
+            updateCustomer.setCustcountry(customer.getCustcountry());
+        }
+
+        if (customer.getGrade() != null) {
+            updateCustomer.setGrade(customer.getGrade());
+        }
+
+        if (customer.hasopeningamt) {
+            updateCustomer.setOpeningamt(customer.getOpeningamt());
+        }
+
+        if (customer.hasreceiveamt) {
+            updateCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+
+        if (customer.haspaymentamt) {
+            updateCustomer.setPaymentamt(customer.getPaymentamt());
+        }
+
+        if (customer.hasoutstandingamt) {
+            updateCustomer.setOutstandingamt(customer.getOutstandingamt());
+        }
+
+        if (customer.getPhone() != null) {
+            updateCustomer.setPhone(customer.getPhone());
+        }
+
+        // If incoming agent != null, update agent - must already exist or will throw an error
+        if (customer.getAgent() != null) {
+            updateCustomer.setAgent(agentrepos.findById(customer.getAgent().getAgentcode())
+                    .orElseThrow(() -> new EntityNotFoundException("Agent " + customer.getAgent().getAgentcode() + " was not " +
+                            "found."))
+            );
+        }
+
+        // If incoming customer orders is > 0, clear current orders and assign new values
+        if (customer.getOrders().size() > 0) {
+            updateCustomer.getOrders().clear();
+            for (Order o : customer.getOrders()) {
+                // Create newOrder object from incoming values -- must follow Order constructor
+                Order newOrder = new Order(o.getOrdamount(), o.getAdvanceamount(), updateCustomer,
+                        o.getOrderdescription());
+
+                // Clear any existing payments in newOrder first
+                newOrder.getPayments().clear();
+
+                // Iterate through payment list and assign amounts to their fields in newOrder
+                for (Payment p : o.getPayments()) {
+                    // Create newPayment object -- value must already exist in DB or throw error
+                    Payment newPayment = paymentrepos.findById(p.getPaymentid())
+                            .orElseThrow(() -> new EntityNotFoundException("Payment ID " + p.getPaymentid() + " was not " +
+                                    "found."));
+                    // Add newPayment object to newOrder
+                    newOrder.getPayments().add(newPayment);
+                }
+                // Add newOrder object to updateCustomer
+                updateCustomer.getOrders().add(newOrder);
+            }
+        }
+
+        // Save updated customer to DB
+        return custrepos.save(updateCustomer);
+    }
+
+    @Transactional
+    @Override
     public void delete(long custcode) {
         // Check if custcode exists in DB & delete or throw error if not found
         if (custrepos.findById(custcode).isPresent()) {

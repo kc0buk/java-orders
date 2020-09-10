@@ -22,6 +22,9 @@ public interface CustomerServices {
     // Used by POST & PUT request in CustomerController
     Customer save(Customer customer);
 
+    // Used by PATCH request in CustomerController
+    Customer update(Customer customer, long custcode);
+
     // Used by DELETE request in CustomerController
     void delete(long custcode);
 }
