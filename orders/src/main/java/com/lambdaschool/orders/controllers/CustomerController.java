@@ -1,8 +1,8 @@
-package com.lambdaschool.crudyorders.controllers;
+package com.lambdaschool.orders.controllers;
 
-import com.lambdaschool.crudyorders.models.Customer;
-import com.lambdaschool.crudyorders.services.CustomerServices;
-import com.lambdaschool.crudyorders.views.OrderCount;
+import com.lambdaschool.orders.models.Customer;
+import com.lambdaschool.orders.services.CustomerServices;
+import com.lambdaschool.orders.views.OrderCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

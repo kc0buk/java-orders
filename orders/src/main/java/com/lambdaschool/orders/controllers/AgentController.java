@@ -1,7 +1,7 @@
-package com.lambdaschool.crudyorders.controllers;
+package com.lambdaschool.orders.controllers;
 
-import com.lambdaschool.crudyorders.models.Agent;
-import com.lambdaschool.crudyorders.services.AgentServices;
+import com.lambdaschool.orders.models.Agent;
+import com.lambdaschool.orders.services.AgentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

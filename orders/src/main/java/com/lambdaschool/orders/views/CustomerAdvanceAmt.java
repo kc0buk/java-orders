@@ -1,4 +1,4 @@
-//package com.lambdaschool.crudyorders.views;
+//package com.lambdaschool.orders.views;
 //
 //public interface CustomerAdvanceAmt {
 //    String getName();

@@ -1,23 +1,18 @@
-package com.lambdaschool.crudyorders;
+package com.lambdaschool.orders;
 
 //import com.github.javafaker.Faker;
-import com.lambdaschool.crudyorders.models.Agent;
-import com.lambdaschool.crudyorders.models.Customer;
-import com.lambdaschool.crudyorders.models.Order;
-import com.lambdaschool.crudyorders.models.Payment;
-import com.lambdaschool.crudyorders.repositories.AgentRepository;
-import com.lambdaschool.crudyorders.repositories.CustomerRepository;
-import com.lambdaschool.crudyorders.repositories.OrderRepository;
-import com.lambdaschool.crudyorders.repositories.PaymentRepository;
+import com.lambdaschool.orders.models.Agent;
+import com.lambdaschool.orders.models.Customer;
+import com.lambdaschool.orders.models.Order;
+import com.lambdaschool.orders.models.Payment;
+import com.lambdaschool.orders.repositories.AgentRepository;
+import com.lambdaschool.orders.repositories.CustomerRepository;
+import com.lambdaschool.orders.repositories.OrderRepository;
+import com.lambdaschool.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Random;
-import java.util.Set;
 
 
 @Transactional

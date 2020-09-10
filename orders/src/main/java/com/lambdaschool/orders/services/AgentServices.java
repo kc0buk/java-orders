@@ -1,6 +1,6 @@
-package com.lambdaschool.crudyorders.services;
+package com.lambdaschool.orders.services;
 
-import com.lambdaschool.crudyorders.models.Agent;
+import com.lambdaschool.orders.models.Agent;
 
 public interface AgentServices {
 

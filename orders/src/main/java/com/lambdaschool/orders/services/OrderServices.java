@@ -1,7 +1,7 @@
-package com.lambdaschool.crudyorders.services;
+package com.lambdaschool.orders.services;
 
-import com.lambdaschool.crudyorders.models.Order;
-//import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
+import com.lambdaschool.orders.models.Order;
+//import com.lambdaschool.orders.views.CustomerAdvanceAmt;
 
 import java.util.List;
 

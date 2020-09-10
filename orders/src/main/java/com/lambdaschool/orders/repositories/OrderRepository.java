@@ -1,9 +1,7 @@
-package com.lambdaschool.crudyorders.repositories;
+package com.lambdaschool.orders.repositories;
 
-import com.lambdaschool.crudyorders.models.Order;
-//import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.data.jpa.repository.Query;
+import com.lambdaschool.orders.models.Order;
+//import com.lambdaschool.orders.views.CustomerAdvanceAmt;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

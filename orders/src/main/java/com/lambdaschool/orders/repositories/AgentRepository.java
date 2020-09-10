@@ -1,6 +1,6 @@
-package com.lambdaschool.crudyorders.repositories;
+package com.lambdaschool.orders.repositories;
 
-import com.lambdaschool.crudyorders.models.Agent;
+import com.lambdaschool.orders.models.Agent;
 import org.springframework.data.repository.CrudRepository;
 
 public interface AgentRepository extends CrudRepository<Agent, Long> {

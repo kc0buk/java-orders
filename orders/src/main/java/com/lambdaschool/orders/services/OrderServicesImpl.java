@@ -1,12 +1,11 @@
-package com.lambdaschool.crudyorders.services;
+package com.lambdaschool.orders.services;
 
-import com.lambdaschool.crudyorders.models.Customer;
-import com.lambdaschool.crudyorders.models.Order;
-import com.lambdaschool.crudyorders.models.Payment;
-import com.lambdaschool.crudyorders.repositories.CustomerRepository;
-import com.lambdaschool.crudyorders.repositories.OrderRepository;
-//import com.lambdaschool.crudyorders.views.CustomerAdvanceAmt;
-import com.lambdaschool.crudyorders.repositories.PaymentRepository;
+import com.lambdaschool.orders.models.Order;
+import com.lambdaschool.orders.models.Payment;
+import com.lambdaschool.orders.repositories.CustomerRepository;
+import com.lambdaschool.orders.repositories.OrderRepository;
+//import com.lambdaschool.orders.views.CustomerAdvanceAmt;
+import com.lambdaschool.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
