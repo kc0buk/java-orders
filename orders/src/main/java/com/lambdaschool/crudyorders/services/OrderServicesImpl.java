@@ -58,6 +58,7 @@ public class OrderServicesImpl implements OrderServices {
             .orElseThrow(() -> new EntityNotFoundException("Customer " + order.getCustomer().getCustcode() + " was " +
                     "not found."))
         );
+
         newOrder.getPayments().clear();
         for (Payment p : order.getPayments()) {
             Payment newPayment = paymentrepos.findById(p.getPaymentid())

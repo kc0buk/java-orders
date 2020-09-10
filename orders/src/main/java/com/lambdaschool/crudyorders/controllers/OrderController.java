@@ -58,8 +58,14 @@ public class OrderController {
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
-    // PUT /orders/order/{ordernum}
+    // PUT /orders/order/{ordnum}
     // Completely replaces the given order record
+    @PutMapping(value = "/order/{ordnum}", consumes = {"application/json"}, produces = {"applicaiton/json"})
+    public ResponseEntity<?> replaceOrder(@PathVariable long ordnum, @Valid @RequestBody Order updateOrder) {
+        updateOrder.setOrdnum(ordnum);
+        updateOrder = orderServices.save(updateOrder);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
     // DELETE /orders/order/{ordername}
     // Deletes the given order
