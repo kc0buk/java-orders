@@ -63,11 +63,16 @@ public class CustomerServicesImpl implements CustomerServices {
         // Create a  newCustomer object
         Customer newCustomer = new Customer();
 
-        // If the incoming custcode != 0, find the existing customer and assign that ID to newCustomer (used with PUT
-        // & PATCH requests)
+        // If the incoming custcode != 0
+        // Find the existing customer and assign that ID to newCustomer to replace existing customer
+        // Used with PUT & PATCH requests
+        // If custcode is not found throw error
         // If the incoming custcode == 0, it's new customer, so do nothing. (used with POST requests)
         if(customer.getCustcode() != 0) {
-            findCustomerByID(customer.getCustcode());
+            custrepos.findById(customer.getCustcode())
+                    .orElseThrow(() -> new EntityNotFoundException("Customer " + customer.getCustcode() + " was not " +
+                            "found."));
+//            findCustomerByID(customer.getCustcode());
             newCustomer.setCustcode(customer.getCustcode());
         }
 
