@@ -56,7 +56,10 @@ public class CustomerController {
     // POST /customers/customer
     // Adds a new customer including any new orders
     @PostMapping(value = "/customer", consumes = {"application/json"}, produces = {"application/json"})
+
+    // Calls addNewCustomer method, check data is valid JSON object, sets incoming data to newCustomer object
     public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer newCustomer) {
+
         // Resets Custcode to 0 to ensure create new customer
         newCustomer.setCustcode(0);
 
@@ -96,5 +99,14 @@ public class CustomerController {
 
     // DELETE /customers/customer/{custcode}
     // Deletes the given customer including any associated orders
+    @DeleteMapping(value = "/customer/{custcode}")
+    public ResponseEntity<?> deleteCustomerByID(@PathVariable long custcode) {
+
+        // Calls delete method from customerServices and passes in custcode from PathVariable
+        customerServices.delete(custcode);
+
+        // Return response status OK
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
