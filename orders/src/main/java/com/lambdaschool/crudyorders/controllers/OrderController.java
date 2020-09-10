@@ -69,4 +69,9 @@ public class OrderController {
 
     // DELETE /orders/order/{ordername}
     // Deletes the given order
+    @DeleteMapping(value = "/order/{ordnum}")
+    public ResponseEntity<?> deleteOrderByID(@PathVariable long ordnum) {
+        orderServices.delete(ordnum);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

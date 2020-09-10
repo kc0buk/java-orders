@@ -12,4 +12,6 @@ public interface OrderServices {
     List<Order> getCustAdvanceAmt(double amount);
 
     Order save(Order order);
+
+    void delete(long ordnum);
 }

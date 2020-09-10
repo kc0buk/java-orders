@@ -70,5 +70,13 @@ public class OrderServicesImpl implements OrderServices {
         return ordersrepos.save(newOrder);
     }
 
-
+    @Transactional
+    @Override
+    public void delete(long ordnum) {
+        if (ordersrepos.findById(ordnum).isPresent()) {
+            ordersrepos.deleteById((ordnum));
+        } else {
+            throw new EntityNotFoundException("Order number " + ordnum + " was not found.");
+        }
+    }
 }
